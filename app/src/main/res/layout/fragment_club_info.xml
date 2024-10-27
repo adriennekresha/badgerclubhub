@@ -7,7 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ClubInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/clubNameTextView"
         android:layout_width="match_parent"
@@ -16,6 +15,7 @@
         android:textStyle="bold"
         android:text="Club Name Here"
         android:textColor="@color/red"
+        android:fontFamily="@font/advent_pro_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -30,6 +30,7 @@
         android:textStyle="bold"
         android:text="Description"
         android:textColor="@color/red"
+        android:fontFamily="@font/advent_pro_bold"
         app:layout_constraintTop_toBottomOf="@id/clubNameTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -56,6 +57,7 @@
         android:textStyle="bold"
         android:text="Contact Information"
         android:textColor="@color/red"
+        android:fontFamily="@font/advent_pro_bold"
         app:layout_constraintTop_toBottomOf="@id/clubDescriptionTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -106,6 +108,7 @@
         android:textStyle="bold"
         android:text="Social Media"
         android:textColor="@color/red"
+        android:fontFamily="@font/advent_pro_bold"
         app:layout_constraintTop_toBottomOf="@id/clubAddressTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -120,6 +123,7 @@
         android:textStyle="bold"
         android:text="Upcoming Events"
         android:textColor="@color/red"
+        android:fontFamily="@font/advent_pro_bold"
         app:layout_constraintTop_toBottomOf="@id/socialMediaHeaderTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
