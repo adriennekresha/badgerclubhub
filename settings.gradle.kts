@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BadgerClubHub"
+rootProject.name = "Badger Club Hub"
 include(":app")
  
