@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardElevation="6dp"
+    android:layout_margin="8dp"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/clubTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Club Name"
+            android:textColor="#8C1A11"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginStart="10dp"
+        android:id="@+id/descriptionTextView"
+        android:text="Club Description"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+     </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
