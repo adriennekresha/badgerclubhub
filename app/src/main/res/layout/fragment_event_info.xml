@@ -5,21 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ClubInfoFragment">
+    tools:context=".EventInfoFragment">
 
     <TextView
-        android:id="@+id/clubNameTextView"
+        android:id="@+id/eventNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:text="Club Name Here"
+        android:text="Event Name Here"
         android:textColor="@color/red"
         android:fontFamily="@font/advent_pro_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp" />
+
+    <TextView
+        android:id="@+id/clubNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="Club Name Here"
+        android:textColor="@color/red"
+        android:fontFamily="@font/advent_pro_bold"
+        app:layout_constraintTop_toBottomOf="@id/eventNameTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginHorizontal="20dp" />
 
     <TextView
@@ -38,11 +52,11 @@
         android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/clubDescriptionTextView"
+        android:id="@+id/eventDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="Club description goes here"
+        android:text="Event description goes here"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/descriptionHeaderTextView"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,91 +64,83 @@
         android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/contactHeaderTextView"
+        android:id="@+id/dateHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Contact Information"
+        android:text="Date"
         android:textColor="@color/red"
         android:fontFamily="@font/advent_pro_bold"
-        app:layout_constraintTop_toBottomOf="@id/clubDescriptionTextView"
+        app:layout_constraintTop_toBottomOf="@id/eventDescriptionTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/clubEmailTextView"
+        android:id="@+id/eventDateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="@string/club_email"
+        android:text="Event date goes here"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/contactHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@id/dateHeaderTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginHorizontal="20dp" />
 
-    <TextView
-        android:id="@+id/clubPhoneTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/club_phone"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/clubEmailTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/clubAddressTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/club_address"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/clubPhoneTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="20dp" />
-
-    <TextView
-        android:id="@+id/socialMediaHeaderTextView"
+        android:id="@+id/timeHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Social Media"
+        android:text="Time"
         android:textColor="@color/red"
         android:fontFamily="@font/advent_pro_bold"
-        app:layout_constraintTop_toBottomOf="@id/clubAddressTextView"
+        app:layout_constraintTop_toBottomOf="@id/eventDateTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/upcomingEventsHeaderTextView"
+        android:id="@+id/eventTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Event time goes here"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/timeHeaderTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="20dp" />
+
+    <TextView
+        android:id="@+id/locationHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Upcoming Events"
+        android:text="Location"
         android:textColor="@color/red"
         android:fontFamily="@font/advent_pro_bold"
-        app:layout_constraintTop_toBottomOf="@id/socialMediaHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@id/eventTimeTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcomingEventsRecyclerView"
+    <TextView
+        android:id="@+id/eventLocationTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/upcomingEventsHeaderTextView"
+        android:textSize="20sp"
+        android:text="Event location goes here"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/locationHeaderTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginHorizontal="20dp" />
