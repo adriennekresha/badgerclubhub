@@ -4,10 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml">
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/SearchFragment"
         android:name="com.cs407.badgerclubhub.SearchFragment"
         android:label="search"
         tools:layout="@layout/fragment_search">
+    </fragment>
+
+    <fragment
+        android:id="@+id/ResultsFragment"
+        android:name="com.cs407.badgerclubhub.ResultsFragment"
+        android:label="results"
+        tools:layout="@layout/fragment_result">
     </fragment>
 
 </navigation>
