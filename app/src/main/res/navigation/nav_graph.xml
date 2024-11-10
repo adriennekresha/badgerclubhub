@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml">
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/HomeFragment">
     <fragment
         android:id="@+id/SearchFragment"
         android:name="com.cs407.badgerclubhub.SearchFragment"
@@ -15,6 +16,16 @@
         android:name="com.cs407.badgerclubhub.ResultsFragment"
         android:label="results"
         tools:layout="@layout/fragment_result">
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name = "com.cs407.badgerclubhub.HomeFragment"
+        android:label="home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_discover_to_search"
+            app:destination="@id/SearchFragment"/>
     </fragment>
 
 </navigation>
