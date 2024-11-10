@@ -5,22 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ClubInfoFragment">
+    tools:context=".EventInfoFragment">
+
+    <TextView
+        android:id="@+id/eventNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="Event Name"
+        android:textColor="@color/red"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp" />
 
     <TextView
         android:id="@+id/clubNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="sans-serif-black"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:text="Club Name"
         android:textColor="@color/red"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
+        app:layout_constraintTop_toBottomOf="@id/eventNameTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginHorizontal="20dp" />
 
     <TextView
         android:id="@+id/descriptionHeaderTextView"
@@ -34,138 +48,125 @@
         app:layout_constraintTop_toBottomOf="@id/clubNameTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/clubDescriptionTextView"
+        android:id="@+id/eventDescriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Club description goes here"
+        android:layout_marginHorizontal="20dp"
+        android:text="Event description goes here"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/descriptionHeaderTextView"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="20dp" />
+        app:layout_constraintTop_toBottomOf="@id/descriptionHeaderTextView" />
 
     <TextView
-        android:id="@+id/contactHeaderTextView"
+        android:id="@+id/dateHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Contact Information"
+        android:text="Date"
         android:textColor="@color/red"
         android:fontFamily="sans-serif-black"
-        app:layout_constraintTop_toBottomOf="@id/clubDescriptionTextView"
+        app:layout_constraintTop_toBottomOf="@id/eventDescriptionTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/clubEmailTextView"
+        android:id="@+id/eventDateTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="@string/club_email"
+        android:text="Event date goes here"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/contactHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@id/dateHeaderTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginHorizontal="20dp" />
 
-    <TextView
-        android:id="@+id/clubPhoneTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/club_phone"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/clubEmailTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/clubAddressTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/club_address"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintTop_toBottomOf="@id/clubPhoneTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="20dp" />
-
-    <TextView
-        android:id="@+id/socialMediaHeaderTextView"
+        android:id="@+id/timeHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Social Media"
+        android:text="Time"
         android:textColor="@color/red"
         android:fontFamily="sans-serif-black"
-        app:layout_constraintTop_toBottomOf="@id/clubAddressTextView"
+        app:layout_constraintTop_toBottomOf="@id/eventDateTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
 
-    <LinearLayout
-        android:id="@+id/socialMediaContainer"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/eventTimeTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/socialMediaHeaderTextView"
+        android:textSize="20sp"
+        android:text="Event time goes here"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/timeHeaderTextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginHorizontal="10dp">
-
-        <ImageButton
-            android:id="@+id/instagramButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/instagram" />
-
-        <ImageButton
-            android:id="@+id/discordButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/discord" />
-    </LinearLayout>
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="20dp" />
 
     <TextView
-        android:id="@+id/upcomingEventsHeaderTextView"
+        android:id="@+id/locationHeaderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Upcoming Events"
+        android:text="Location"
         android:textColor="@color/red"
         android:fontFamily="sans-serif-black"
-        app:layout_constraintTop_toBottomOf="@id/socialMediaContainer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginHorizontal="20dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcomingEventsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/upcomingEventsHeaderTextView"
+        app:layout_constraintTop_toBottomOf="@id/eventTimeTextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp" />
+
+    <TextView
+        android:id="@+id/eventLocationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Event location goes here"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/locationHeaderTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginHorizontal="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/locationCardView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toBottomOf="@id/eventLocationTextView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp">
+
+<!--        <com.google.android.gms.maps.MapView-->
+<!--            android:id="@+id/locationMapView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:liteMode="true"-->
+<!--            app:mapType="normal" />-->
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
