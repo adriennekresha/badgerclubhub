@@ -173,13 +173,13 @@
         android:text="Organizations"
         android:textColor="@color/red"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/searchRecyclerView"
+        app:layout_constraintBottom_toTopOf="@id/clubsRecyclerView"
         app:layout_constraintStart_toStartOf="@id/discover"
         app:layout_constraintTop_toBottomOf="@id/category_buttons"
         app:layout_constraintVertical_bias="0.184" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchRecyclerView"
+        android:id="@+id/clubsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
