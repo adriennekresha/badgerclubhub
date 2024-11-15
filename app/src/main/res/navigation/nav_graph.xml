@@ -3,29 +3,141 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/HomeFragment">
-    <fragment
-        android:id="@+id/SearchFragment"
-        android:name="com.cs407.badgerclubhub.SearchFragment"
-        android:label="search"
-        tools:layout="@layout/fragment_search">
-    </fragment>
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/ResultsFragment"
-        android:name="com.cs407.badgerclubhub.ResultsFragment"
-        android:label="results"
-        tools:layout="@layout/fragment_result">
-    </fragment>
-
-    <fragment
-        android:id="@+id/HomeFragment"
+        android:id="@+id/homeFragment"
         android:name = "com.cs407.badgerclubhub.HomeFragment"
         android:label="home"
         tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_home_club_to_club_info"
+            app:destination="@id/clubInfoFragment"/>
+
         <action
             android:id="@+id/action_home_discover_to_search"
-            app:destination="@id/SearchFragment"/>
+            app:destination="@id/searchFragment"/>
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_home_search_to_search"
+            app:destination="@id/searchFragment"/>
+
+        <action
+            android:id="@+id/action_home_schedule_to_schedule"
+            app:destination="@id/scheduleFragment"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.cs407.badgerclubhub.SearchFragment"
+        android:label="search"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_search_category_to_category"
+            app:destination="@id/categoryFragment"/>
+
+        <action
+            android:id="@+id/action_search_club_to_club_info"
+            app:destination="@id/clubInfoFragment"/>
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_search_home_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/action_search_schedule_to_schedule"
+            app:destination="@id/scheduleFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.cs407.badgerclubhub.ScheduleFragment"
+        android:label="schedule"
+        tools:layout="@layout/fragment_schedule">
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_schedule_home_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/action_schedule_search_to_search"
+            app:destination="@id/searchFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.cs407.badgerclubhub.ResultsFragment"
+        android:label="results"
+        tools:layout="@layout/fragment_result">
+
+        <action
+            android:id="@+id/action_results_club_to_club_info"
+            app:destination="@id/clubInfoFragment"/>
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_results_home_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/action_results_search_to_search"
+            app:destination="@id/searchFragment"/>
+
+        <action
+            android:id="@+id/action_results_schedule_to_schedule"
+            app:destination="@id/scheduleFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/clubInfoFragment"
+        android:name="com.cs407.badgerclubhub.ClubInfoFragment"
+        android:label="club info"
+        tools:layout="@layout/fragment_club_info">
+
+        <action
+            android:id="@+id/action_club_info_add_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_club_info_home_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/action_club_info_search_to_search"
+            app:destination="@id/searchFragment"/>
+
+        <action
+            android:id="@+id/action_club_info_schedule_to_schedule"
+            app:destination="@id/scheduleFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.cs407.badgerclubhub.CategoryFragment"
+        android:label="category"
+        tools:layout="@layout/fragment_category">
+
+        <action
+            android:id="@+id/action_category_club_to_club_info"
+            app:destination="@id/clubInfoFragment"/>
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_category_home_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/action_category_search_to_search"
+            app:destination="@id/searchFragment"/>
+
+        <action
+            android:id="@+id/action_category_schedule_to_schedule"
+            app:destination="@id/scheduleFragment"/>
+    </fragment>
 </navigation>
