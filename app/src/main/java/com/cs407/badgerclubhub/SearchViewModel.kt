@@ -12,38 +12,63 @@ import org.json.JSONObject
 
 class SearchViewModel :ViewModel() {
     //MutableLiveData object for category data from API
-    private val _categoriesData = MutableLiveData<Map<String, List<JSONObject>>>()
+    private val _categoriesMap = MutableLiveData<Map<String, List<Club>>>()
     //Live data allows fragments to view tha the data
-    val categoriesData: LiveData<Map<String, List<JSONObject>>> get() = _categoriesData
-
+    val categoriesMap: LiveData<Map<String, List<Club>>> get() = _categoriesMap
+    private val _allClubs = MutableLiveData<List<Club>>()
+    val allClubs:  LiveData<List<Club>> = _allClubs
     //function to get categories from the api and sort the clubs into categories
     fun sortCategories (context: Context) {
         val winApi = "https://win.wisc.edu/api/discovery/search/organizations"
         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, winApi, null, {response ->
+        val request = JsonObjectRequest(Request.Method.GET, winApi, null, {response ->
             try {
                 //all organizations from WIN
                 val clubs = response.getJSONArray("value")
                 //map to sort clubs by their categories
-                val sortedClubsbyCategory = mutableMapOf<String, MutableList<JSONObject>>()
+                val sortedClubsByCategory = mutableMapOf<String, MutableList<Club>>()
                 //iterate through clubs and categorize
-                for(i in 0 until clubs.length()){
-                    val club = clubs.getJSONObject(i)
-                    val categoryNames = club.optJSONArray("CategoryNames")
-                    categoryNames?.let {
-                        for(j in 0 until it.length()) {
-                            val category = it.getString(j)
-                            //check if category is already in the map and add if it isn't
-                            if(!sortedClubsbyCategory.containsKey(category)){
-                                sortedClubsbyCategory[category] = mutableListOf()
-                            }
-                            sortedClubsbyCategory[category]?.add(club)
+                for(i in 0 until clubs.length()) {
+                    val clubJSON = clubs.getJSONObject(i)
+                    val club = Club(
+                        name = clubJSON.getString("Name"),
+                        description = clubJSON.getString("Description"),
+                        categoryNames = clubJSON.getJSONArray("CategoryNames").let { jsonArray ->
+                            List(jsonArray.length()) { index -> jsonArray.getString(index) }
                         }
-                    }
+                    )
+                    club.categoryNames.forEach { category ->
+                        sortedClubsByCategory.getOrPut(category) {mutableListOf()}
+                            .add(club)                    }
+
+
                 }
-                _categoriesData.postValue(sortedClubsbyCategory)
+                _categoriesMap.postValue(sortedClubsByCategory.toMap())
 
             } catch (e: Exception) {e.printStackTrace()}}, {error -> error.printStackTrace()})
-        requestQueue.add(jsonObjectRequest)
+        requestQueue.add(request)
+    }
+    // method to get all clubs from API
+    fun getAllClubs(context: Context) {
+        val winApi = "https://win.wisc.edu/api/discovery/search/organizations"
+        val requestQueue: RequestQueue = Volley.newRequestQueue(context)
+        val request = JsonObjectRequest(Request.Method.GET, winApi, null, { response ->
+            //get clubs from the API
+            val clubsArray = response.getJSONArray("value")
+            val clubs = mutableListOf<Club>()
+            //loop through list to get desired data
+            for (i in 0 until clubsArray.length()){
+                val clubJSON = clubsArray.getJSONObject(i)
+                val club = Club(
+                    name = clubJSON.getString("Name"),
+                    description = clubJSON.getString("Description"),
+                    categoryNames = clubJSON.getJSONArray("CategoryNames").let { jsonArray ->
+                        List(jsonArray.length()) { index -> jsonArray.getString(index) }
+                    }
+                )
+                clubs.add(club)
+            }
+        }, {error -> error.printStackTrace()})
+        requestQueue.add(request)
     }
 }

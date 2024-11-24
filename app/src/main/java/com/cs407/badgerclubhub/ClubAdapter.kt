@@ -5,11 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import org.json.JSONObject
 
-class CategoryAdapter (private val clubs: List<JSONObject>) :
-    RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+class ClubAdapter (private val clubs: List<Club>) :
+    RecyclerView.Adapter<ClubAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.club_item, parent, false)
         return ViewHolder(view)
@@ -17,8 +16,9 @@ class CategoryAdapter (private val clubs: List<JSONObject>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val club = clubs[position]
-        holder.clubNameTextView.text = club.getString("Name")
-        holder.clubDescription.text = club.optString("Description", "No Description Available")
+        holder.clubNameTextView.text = club.name
+        holder.clubDescription.text = club.description
+        //add categories here too
 
     }
     override fun getItemCount():Int {
@@ -27,5 +27,6 @@ class CategoryAdapter (private val clubs: List<JSONObject>) :
     class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
         val clubNameTextView: TextView = itemView.findViewById(R.id.clubNameTextView)
         val clubDescription: TextView = itemView.findViewById(R.id.descriptionTextView)
+        //need to add categories to the club cards
     }
 }

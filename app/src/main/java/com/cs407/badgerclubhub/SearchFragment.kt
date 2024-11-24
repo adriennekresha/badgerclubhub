@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONObject
 
 class SearchFragment : Fragment() {
@@ -32,6 +33,9 @@ class SearchFragment : Fragment() {
     private lateinit var social_fraternity_sorority: ImageButton
     private lateinit var sports_recreation: ImageButton
 
+    private lateinit var clubsRecyclerView: RecyclerView
+    private lateinit var adapter: ClubAdapter
+
 
 
     override fun onCreateView(
@@ -43,6 +47,10 @@ class SearchFragment : Fragment() {
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         //initialize view model
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        viewModel.allClubs.observe(viewLifecycleOwner, Observer { clubs ->
+            adapter = ClubAdapter(clubs)
+            clubsRecyclerView.adapter = adapter
+        })
         //initialize buttons
         academic_career = view.findViewById(R.id.academic_career)
         activism_advocacy = view.findViewById(R.id.activism_advocacy)
@@ -57,8 +65,8 @@ class SearchFragment : Fragment() {
         service_volunteer = view.findViewById(R.id.service_volunteer)
         social_fraternity_sorority = view.findViewById(R.id.social_fraternity_sorority)
         sports_recreation = view.findViewById(R.id.sports_recreation)
-        viewModel.categoriesData.observe(viewLifecycleOwner) {
-            categoriesData -> populateButtons(categoriesData as Map<String, MutableList<JSONObject>>)
+        viewModel.categoriesMap.observe(viewLifecycleOwner) {
+            categoriesMap -> populateButtons(categoriesMap as Map<String, MutableList<Club>>)
         }
 
         bottomNav.setOnItemSelectedListener { item ->
@@ -79,56 +87,60 @@ class SearchFragment : Fragment() {
         }
 
         bottomNav.selectedItemId = R.id.search
+        clubsRecyclerView = view.findViewById(R.id.clubsRecyclerView)
+        clubsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return view
     }
-    private fun populateButtons (categoriesData: Map<String, MutableList<JSONObject>>) {
+    //not functioning
+    private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {
         academic_career.setOnClickListener {
-            navToCategory("Academic/Career", categoriesData["Academics/Career"]?: emptyList())
+            navToCategory("Academic/Career", categoriesMap["Academics/Career"]?: emptyList())
         }
         activism_advocacy.setOnClickListener {
-            navToCategory("Activism/Advocacy", categoriesData["Activism/Advocacy"]?: emptyList())
+            navToCategory("Activism/Advocacy", categoriesMap["Activism/Advocacy"]?: emptyList())
         }
         agriculture_environmental.setOnClickListener {
-            navToCategory("Agricultural/Environmental", categoriesData["Agricultural/Environmental"]?: emptyList())
+            navToCategory("Agricultural/Environmental", categoriesMap["Agricultural/Environmental"]?: emptyList())
         }
         arts_music.setOnClickListener {
-           navToCategory("Arts/Music", categoriesData["Arts/Music"]?: emptyList())
+           navToCategory("Arts/Music", categoriesMap["Arts/Music"]?: emptyList())
         }
         cultural_ethnic.setOnClickListener {
-            navToCategory("Cultural/Ethnic", categoriesData["Cultural/Ethnic"]?: emptyList())
+            navToCategory("Cultural/Ethnic", categoriesMap["Cultural/Ethnic"]?: emptyList())
         }
         graduate_professional.setOnClickListener {
-            navToCategory("Graduate/Professional", categoriesData["Graduate/Professional"]?: emptyList())
+            navToCategory("Graduate/Professional", categoriesMap["Graduate/Professional"]?: emptyList())
         }
         health_wellness.setOnClickListener {
-            navToCategory("Health/Wellness", categoriesData["Health/Welness"]?: emptyList())
+            navToCategory("Health/Wellness", categoriesMap["Health/Welness"]?: emptyList())
         }
         media_publication.setOnClickListener {
-            navToCategory("Media/Publication", categoriesData["Media/Publication"]?: emptyList())
+            navToCategory("Media/Publication", categoriesMap["Media/Publication"]?: emptyList())
         }
         political_interest.setOnClickListener {
-            navToCategory("Political Interest", categoriesData["Political Interest"]?: emptyList())
+            navToCategory("Political Interest", categoriesMap["Political Interest"]?: emptyList())
         }
         religious_spiritual.setOnClickListener {
-            navToCategory("Religious/Spiritual", categoriesData["Religious/Spiritual"]?: emptyList())
+            navToCategory("Religious/Spiritual", categoriesMap["Religious/Spiritual"]?: emptyList())
         }
         service_volunteer.setOnClickListener {
-            navToCategory("Service/Volunteer", categoriesData["Serivce/Volunteer"]?: emptyList())
+            navToCategory("Service/Volunteer", categoriesMap["Service/Volunteer"]?: emptyList())
         }
         social_fraternity_sorority.setOnClickListener {
-            navToCategory("Social Fraternity/Sorority", categoriesData["Social Fraternity/Sorority"]?: emptyList())
+            navToCategory("Social Fraternity/Sorority", categoriesMap["Social Fraternity/Sorority"]?: emptyList())
         }
         sports_recreation.setOnClickListener {
-            navToCategory("Sports/Recreation", categoriesData["Sports/Recreation"]?: emptyList())
+            navToCategory("Sports/Recreation", categoriesMap["Sports/Recreation"]?: emptyList())
         }
     }
-    //navigate from buttons to category fragment
-    private fun navToCategory(category: String, clubs: List<JSONObject>){
+    //navigate from buttons to category fragment -- this doesn't work!!
+    private fun navToCategory(category: String, clubs: List<Club>){
         val bundle = Bundle().apply {
             putString("category_name", category)
             putSerializable("clubs", ArrayList(clubs))
         }
+
         findNavController().navigate(R.id.action_search_category_to_category, bundle)
     }
 }
