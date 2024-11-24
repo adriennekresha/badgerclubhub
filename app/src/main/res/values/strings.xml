@@ -3,4 +3,7 @@
     <string name="club_email">Email: </string>
     <string name="club_phone">Phone: </string>
     <string name="club_address">Address: </string>
+    <string name ="category_name">Category</string>
+    <string name ="club_card_name">Club Name</string>
+    <string name ="club_card_description">Club Description</string>
 </resources>

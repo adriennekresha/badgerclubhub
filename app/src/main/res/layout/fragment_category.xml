@@ -14,7 +14,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-black"
-        android:text="Category"
+        android:text= "@string/category_name"
         android:textColor="@color/red"
         android:textSize="40sp"
         android:textStyle="bold"
