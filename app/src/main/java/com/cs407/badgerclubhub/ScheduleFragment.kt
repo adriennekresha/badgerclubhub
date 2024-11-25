@@ -18,10 +18,19 @@ class ScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_schedule, container, false)
+        return inflater.inflate(R.layout.fragment_schedule, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Calendar
+        val calendarView: CalendarView = view.findViewById(R.id.calendarView)
+        val currentDate = Calendar.getInstance().timeInMillis
+        calendarView.date = currentDate
+
+        // Bottom Navigation
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
@@ -38,18 +47,5 @@ class ScheduleFragment : Fragment() {
                 else -> false
             }
         }
-
-        bottomNav.selectedItemId = R.id.schedule
-
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val calendarView: CalendarView = view.findViewById(R.id.calendarView)
-
-        val currentDate = Calendar.getInstance().timeInMillis
-        calendarView.date = currentDate
     }
 }
