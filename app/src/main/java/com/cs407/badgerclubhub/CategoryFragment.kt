@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 
 class CategoryFragment : Fragment() {
@@ -27,6 +29,26 @@ class CategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Bottom Navigation
+        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    findNavController().navigate(R.id.action_category_home_to_home)
+                    true
+                }
+                R.id.search -> {
+                    findNavController().navigate(R.id.action_category_search_to_search)
+                    true
+                }
+                R.id.schedule -> {
+                    findNavController().navigate(R.id.action_category_search_to_search)
+                    true
+                }
+                else -> false
+            }
+        }
 
     }
 }

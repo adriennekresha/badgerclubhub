@@ -88,6 +88,7 @@ class SearchFragment : Fragment() {
         social_fraternity_sorority = view.findViewById(R.id.social_fraternity_sorority)
         sports_recreation = view.findViewById(R.id.sports_recreation)
 
+        viewModel.sortCategories(this.requireContext())
         viewModel.categoriesMap.observe(viewLifecycleOwner) {
                 categoriesMap -> populateButtons(categoriesMap as Map<String, MutableList<Club>>)
         }
@@ -96,10 +97,8 @@ class SearchFragment : Fragment() {
         clubsRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 
-    //not functioning
     private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {
         academic_career.setOnClickListener {
-            Toast.makeText(this.context, "Academic/Career category selected", Toast.LENGTH_SHORT).show()
             navToCategory("Academic/Career", categoriesMap["Academics/Career"]?: emptyList())
         }
         activism_advocacy.setOnClickListener {
@@ -139,7 +138,8 @@ class SearchFragment : Fragment() {
             navToCategory("Sports/Recreation", categoriesMap["Sports/Recreation"]?: emptyList())
         }
     }
-    //navigate from buttons to category fragment -- this doesn't work!!
+
+    //navigate from buttons to category fragment
     private fun navToCategory(category: String, clubs: List<Club>){
         val bundle = Bundle().apply {
             putString("category_name", category)
