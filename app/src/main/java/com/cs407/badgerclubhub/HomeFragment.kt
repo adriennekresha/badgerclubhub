@@ -23,7 +23,13 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Discover Clubs
         discoverButton = view.findViewById(R.id.discoverButton)
         discoverButton.setOnClickListener {
             findNavController().navigate(R.id.action_home_discover_to_search)
@@ -31,7 +37,6 @@ class HomeFragment : Fragment() {
 
         // Bottom Navigation
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
@@ -48,31 +53,5 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
-
-        bottomNav.selectedItemId = R.id.home
-
-        return view
     }
-
-
-//    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-//        menuInflater.inflate(R.menu.bottom_menu, menu);
-//    }
-//
-//    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-//        return when (menuItem.itemId) {
-//            R.id.search -> {
-//                findNavController().navigate(R.id.action_home_search_to_search)
-//                true
-//            }
-//
-//            R.id.schedule -> {
-//                findNavController().navigate(R.id.action_home_schedule_to_schedule)
-//                true
-//            }
-//
-//            else -> false
-//        }
-//    }
-
 }
