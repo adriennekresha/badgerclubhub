@@ -36,39 +36,19 @@ class SearchFragment : Fragment() {
     private lateinit var clubsRecyclerView: RecyclerView
     private lateinit var adapter: ClubAdapter
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
-        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        //initialize view model
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        viewModel.allClubs.observe(viewLifecycleOwner, Observer { clubs ->
-            adapter = ClubAdapter(clubs)
-            clubsRecyclerView.adapter = adapter
-        })
-        //initialize buttons
-        academic_career = view.findViewById(R.id.academic_career)
-        activism_advocacy = view.findViewById(R.id.activism_advocacy)
-        agriculture_environmental = view.findViewById(R.id.agriculture_environmental)
-        arts_music = view.findViewById(R.id.arts_music)
-        cultural_ethnic = view.findViewById(R.id.cultural_ethnic)
-        graduate_professional = view.findViewById(R.id.graduate_professional)
-        health_wellness = view.findViewById(R.id.health_wellness)
-        media_publication = view.findViewById(R.id.media_publication)
-        political_interest = view.findViewById(R.id.political_interest)
-        religious_spiritual = view.findViewById(R.id.religious_spiritual)
-        service_volunteer = view.findViewById(R.id.service_volunteer)
-        social_fraternity_sorority = view.findViewById(R.id.social_fraternity_sorority)
-        sports_recreation = view.findViewById(R.id.sports_recreation)
-        viewModel.categoriesMap.observe(viewLifecycleOwner) {
-            categoriesMap -> populateButtons(categoriesMap as Map<String, MutableList<Club>>)
-        }
+        return inflater.inflate(R.layout.fragment_search, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Bottom Navigation
+        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
@@ -86,15 +66,40 @@ class SearchFragment : Fragment() {
             }
         }
 
-        bottomNav.selectedItemId = R.id.search
+        //initialize view model
+        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        viewModel.allClubs.observe(viewLifecycleOwner, Observer { clubs ->
+            adapter = ClubAdapter(clubs)
+            clubsRecyclerView.adapter = adapter
+        })
+
+        //initialize buttons
+        academic_career = view.findViewById(R.id.academic_career)
+        activism_advocacy = view.findViewById(R.id.activism_advocacy)
+        agriculture_environmental = view.findViewById(R.id.agriculture_environmental)
+        arts_music = view.findViewById(R.id.arts_music)
+        cultural_ethnic = view.findViewById(R.id.cultural_ethnic)
+        graduate_professional = view.findViewById(R.id.graduate_professional)
+        health_wellness = view.findViewById(R.id.health_wellness)
+        media_publication = view.findViewById(R.id.media_publication)
+        political_interest = view.findViewById(R.id.political_interest)
+        religious_spiritual = view.findViewById(R.id.religious_spiritual)
+        service_volunteer = view.findViewById(R.id.service_volunteer)
+        social_fraternity_sorority = view.findViewById(R.id.social_fraternity_sorority)
+        sports_recreation = view.findViewById(R.id.sports_recreation)
+
+        viewModel.categoriesMap.observe(viewLifecycleOwner) {
+                categoriesMap -> populateButtons(categoriesMap as Map<String, MutableList<Club>>)
+        }
+
         clubsRecyclerView = view.findViewById(R.id.clubsRecyclerView)
         clubsRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        return view
     }
+
     //not functioning
     private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {
         academic_career.setOnClickListener {
+            Toast.makeText(this.context, "Academic/Career category selected", Toast.LENGTH_SHORT).show()
             navToCategory("Academic/Career", categoriesMap["Academics/Career"]?: emptyList())
         }
         activism_advocacy.setOnClickListener {
