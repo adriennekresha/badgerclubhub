@@ -9,10 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class SearchFragment : Fragment() {
@@ -66,8 +70,10 @@ class SearchFragment : Fragment() {
             }
         }
 
-        //initialize view model
+        //initialize view model and recycler view
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        clubsRecyclerView = view.findViewById(R.id.clubsRecyclerView)
+        clubsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.allClubs.observe(viewLifecycleOwner, Observer { clubs ->
             adapter = ClubAdapter(clubs)
             clubsRecyclerView.adapter = adapter
@@ -93,8 +99,7 @@ class SearchFragment : Fragment() {
                 categoriesMap -> populateButtons(categoriesMap as Map<String, MutableList<Club>>)
         }
 
-        clubsRecyclerView = view.findViewById(R.id.clubsRecyclerView)
-        clubsRecyclerView.layoutManager = LinearLayoutManager(context)
+        viewModel.getAllClubs(this.requireContext())
     }
 
     private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {

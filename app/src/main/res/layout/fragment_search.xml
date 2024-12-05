@@ -162,7 +162,7 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/people_svgrepo_com"
-                android:tooltipText="Fraternity/Sorority" />
+                android:tooltipText="Social Fraternity/Sorority" />
             <ImageButton
                 android:id="@+id/sports_recreation"
                 android:layout_width="80dp"
