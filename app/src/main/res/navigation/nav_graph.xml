@@ -3,7 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name = "com.cs407.badgerclubhub.LoginFragment"
+        android:label="login"
+        tools:layout="@layout/fragment_login" >
+
+        <action
+            android:id="@+id/action_login_signup_to_home"
+            app:destination="@id/homeFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
@@ -27,6 +38,10 @@
         <action
             android:id="@+id/action_home_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
+
+        <action
+            android:id="@+id/action_home_profile_to_profile"
+            app:destination="@id/profileFragment"/>
     </fragment>
 
     <fragment
@@ -51,6 +66,10 @@
         <action
             android:id="@+id/action_search_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
+
+        <action
+            android:id="@+id/action_search_profile_to_profile"
+            app:destination="@id/profileFragment"/>
     </fragment>
 
     <fragment
@@ -67,6 +86,10 @@
         <action
             android:id="@+id/action_schedule_search_to_search"
             app:destination="@id/searchFragment"/>
+
+        <action
+            android:id="@+id/action_schedule_profile_to_profile"
+            app:destination="@id/profileFragment"/>
     </fragment>
 
     <fragment
@@ -91,6 +114,10 @@
         <action
             android:id="@+id/action_results_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
+
+        <action
+            android:id="@+id/action_results_profile_to_profile"
+            app:destination="@id/profileFragment"/>
     </fragment>
 
     <fragment
@@ -115,6 +142,10 @@
         <action
             android:id="@+id/action_club_info_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
+
+        <action
+            android:id="@+id/action_club_info_profile_to_profile"
+            app:destination="@id/profileFragment"/>
     </fragment>
 
     <fragment
@@ -138,6 +169,34 @@
 
         <action
             android:id="@+id/action_category_schedule_to_schedule"
+            app:destination="@id/scheduleFragment"/>
+
+        <action
+            android:id="@+id/action_category_profile_to_profile"
+            app:destination="@id/profileFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name = "com.cs407.badgerclubhub.ProfileFragment"
+        android:label="login"
+        tools:layout="@layout/fragment_profile" >
+
+        <action
+            android:id="@+id/action_profile_signout_to_login"
+            app:destination="@id/loginFragment"/>
+
+        <!-- menu buttons-->
+        <action
+            android:id="@+id/action_profile_home_to_home"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/action_profile_search_to_search"
+            app:destination="@id/searchFragment"/>
+
+        <action
+            android:id="@+id/action_profile_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
     </fragment>
 </navigation>

@@ -44,6 +44,10 @@ class ScheduleFragment : Fragment() {
                 R.id.schedule -> {
                     true
                 }
+                R.id.profile -> {
+                    findNavController().navigate(R.id.action_schedule_profile_to_profile)
+                    true
+                }
                 else -> false
             }
         }

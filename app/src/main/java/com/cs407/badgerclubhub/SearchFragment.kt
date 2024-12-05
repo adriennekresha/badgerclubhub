@@ -37,6 +37,10 @@ class SearchFragment : Fragment() {
                     findNavController().navigate(R.id.action_search_schedule_to_schedule)
                     true
                 }
+                R.id.profile -> {
+                    findNavController().navigate(R.id.action_search_profile_to_profile)
+                    true
+                }
                 else -> false
             }
         }
