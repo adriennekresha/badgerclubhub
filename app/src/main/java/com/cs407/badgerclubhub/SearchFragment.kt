@@ -16,9 +16,14 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
-        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        return inflater.inflate(R.layout.fragment_search, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Bottom Navigation
+        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
@@ -32,12 +37,12 @@ class SearchFragment : Fragment() {
                     findNavController().navigate(R.id.action_search_schedule_to_schedule)
                     true
                 }
+                R.id.profile -> {
+                    findNavController().navigate(R.id.action_search_profile_to_profile)
+                    true
+                }
                 else -> false
             }
         }
-
-        bottomNav.selectedItemId = R.id.search
-
-        return view
     }
 }
