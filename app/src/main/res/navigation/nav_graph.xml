@@ -122,7 +122,9 @@
         android:name="com.cs407.badgerclubhub.CategoryFragment"
         android:label="category"
         tools:layout="@layout/fragment_category">
-
+        <argument
+            android:name = "category_name"
+            app:argType="string"/>
         <action
             android:id="@+id/action_category_club_to_club_info"
             app:destination="@id/clubInfoFragment"/>

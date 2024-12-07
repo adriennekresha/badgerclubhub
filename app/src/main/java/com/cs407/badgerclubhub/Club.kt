@@ -1,4 +1,7 @@
 package com.cs407.badgerclubhub
+import java.io.Serializable
+
+
 
 data class Club (
     //val id: String, not relevant??
@@ -8,4 +11,5 @@ data class Club (
     val categoryNames: List<String>,
     //val status: String,: not relevant??
     //val visibility: String: not relevant??
-)
+): Serializable
+

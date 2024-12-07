@@ -1,6 +1,7 @@
 package com.cs407.badgerclubhub
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,12 +18,13 @@ class SearchViewModel :ViewModel() {
     val categoriesMap: LiveData<Map<String, List<Club>>> get() = _categoriesMap
     private val _allClubs = MutableLiveData<List<Club>>()
     val allClubs:  LiveData<List<Club>> = _allClubs
+    private val winAPI = "https://win.wisc.edu/api/discovery/search/organizations?query&top=3000&filter"
     //function to get categories from the api and sort the clubs into categories
     fun sortCategories (context: Context) {
-        val winApi = "https://win.wisc.edu/api/discovery/search/organizations"
         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-        val request = JsonObjectRequest(Request.Method.GET, winApi, null, {response ->
+        val request = JsonObjectRequest(Request.Method.GET, winAPI, null, {response ->
             try {
+
                 //all organizations from WIN
                 val clubs = response.getJSONArray("value")
                 //map to sort clubs by their categories
@@ -37,6 +39,7 @@ class SearchViewModel :ViewModel() {
                             List(jsonArray.length()) { index -> jsonArray.getString(index) }
                         }
                     )
+
                     club.categoryNames.forEach { category ->
                         sortedClubsByCategory.getOrPut(category) {mutableListOf()}
                             .add(club)                    }
@@ -50,9 +53,8 @@ class SearchViewModel :ViewModel() {
     }
     // method to get all clubs from API
     fun getAllClubs(context: Context) {
-        val winApi = "https://win.wisc.edu/api/discovery/search/organizations"
         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
-        val request = JsonObjectRequest(Request.Method.GET, winApi, null, { response ->
+        val request = JsonObjectRequest(Request.Method.GET, winAPI, null, { response ->
             //get clubs from the API
             val clubsArray = response.getJSONArray("value")
             val clubs = mutableListOf<Club>()

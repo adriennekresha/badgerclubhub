@@ -1,6 +1,7 @@
 package com.cs407.badgerclubhub
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.io.Serializable
 
 class SearchFragment : Fragment() {
     //searchViewModel variable
@@ -71,13 +73,14 @@ class SearchFragment : Fragment() {
         }
 
         //initialize view model and recycler view
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         clubsRecyclerView = view.findViewById(R.id.clubsRecyclerView)
         clubsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.allClubs.observe(viewLifecycleOwner, Observer { clubs ->
             adapter = ClubAdapter(clubs)
             clubsRecyclerView.adapter = adapter
         })
+
 
         //initialize buttons
         academic_career = view.findViewById(R.id.academic_career)
@@ -104,7 +107,7 @@ class SearchFragment : Fragment() {
 
     private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {
         academic_career.setOnClickListener {
-            navToCategory("Academic/Career", categoriesMap["Academics/Career"]?: emptyList())
+           navToCategory("Academic/Career", categoriesMap["Academic/Career"]?: emptyList())
         }
         activism_advocacy.setOnClickListener {
             navToCategory("Activism/Advocacy", categoriesMap["Activism/Advocacy"]?: emptyList())
@@ -146,9 +149,10 @@ class SearchFragment : Fragment() {
 
     //navigate from buttons to category fragment
     private fun navToCategory(category: String, clubs: List<Club>){
+        Log.d("NAVIGATION", "Navigating to category: $category with ${clubs.size} clubs.")
         val bundle = Bundle().apply {
             putString("category_name", category)
-            putSerializable("clubs", ArrayList(clubs))
+            putSerializable("clubs_list", ArrayList(clubs))
         }
 
         findNavController().navigate(R.id.action_search_category_to_category, bundle)

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +16,10 @@ import org.json.JSONObject
 
 class CategoryFragment : Fragment() {
     private lateinit var categoryName: String
-    private lateinit var clubs: List<JSONObject>
+    private lateinit var  categoryTextView: TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ClubAdapter
+    private lateinit var viewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,6 +52,14 @@ class CategoryFragment : Fragment() {
                 else -> false
             }
         }
-
+        viewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
+        categoryName = arguments?.getString("category_name").toString()
+        categoryTextView = view.findViewById(R.id.categoryTextView)
+        categoryTextView.text = categoryName
+        val clubs = arguments?.getSerializable("clubs_list") as? ArrayList<Club>
+        recyclerView = view.findViewById(R.id.clubsRecyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        clubs?.let { adapter = ClubAdapter(it) }
+//
     }
 }
