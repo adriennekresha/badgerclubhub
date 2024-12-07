@@ -149,7 +149,7 @@ class SearchFragment : Fragment() {
 
     //navigate from buttons to category fragment
     private fun navToCategory(category: String, clubs: List<Club>){
-        Log.d("NAVIGATION", "Navigating to category: $category with ${clubs.size} clubs.")
+
         val bundle = Bundle().apply {
             putString("category_name", category)
             putSerializable("clubs_list", ArrayList(clubs))

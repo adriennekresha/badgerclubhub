@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 
+@Suppress("DEPRECATION")
 class CategoryFragment : Fragment() {
     private lateinit var categoryName: String
     private lateinit var  categoryTextView: TextView
@@ -59,7 +60,10 @@ class CategoryFragment : Fragment() {
         val clubs = arguments?.getSerializable("clubs_list") as? ArrayList<Club>
         recyclerView = view.findViewById(R.id.clubsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        clubs?.let { adapter = ClubAdapter(it) }
-//
+        if(clubs!= null) {
+            adapter= ClubAdapter(clubs)
+            recyclerView.adapter = adapter
+        }
+
     }
 }
