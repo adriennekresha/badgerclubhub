@@ -69,6 +69,7 @@ class SearchViewModel :ViewModel() {
                     }
                 )
                 clubs.add(club)
+                _allClubs.postValue(clubs)
             }
         }, {error -> error.printStackTrace()})
         requestQueue.add(request)

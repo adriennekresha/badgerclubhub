@@ -51,6 +51,11 @@
         <action
             android:id="@+id/action_search_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
+        <action
+            android:id="@+id/action_search_to_results"
+            app:destination="@id/resultsFragment"/>
+
+
     </fragment>
 
     <fragment

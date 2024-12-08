@@ -25,6 +25,8 @@
         android:hint="Search for clubs"
         android:layout_marginHorizontal="20dp"
         android:padding="8dp"
+        android:inputType="text"
+
         />
 
     <TextView

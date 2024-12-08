@@ -12,42 +12,44 @@ import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONObject
 
 
-class ClubAdapter (private val clubs: List<Club>, private val fragment: Fragment) :
-    RecyclerView.Adapter<ClubAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+class ClubAdapter (private val clubs: List<Club>, private val listener: onClubCardClickListener) :
+    RecyclerView.Adapter<ClubAdapter.ClubViewHolder>() {
+        interface onClubCardClickListener {
+            fun onClubCardClick(club:Club)
+        }
+        inner class ClubViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+            val name = itemView.findViewById<TextView>(R.id.clubNameTextView)
+            val description = itemView.findViewById<TextView>(R.id.descriptionTextView)
+            fun bind (club: Club){
+                name.text = club.name
+                var clubDescriptionShort = if (club.description.length > 200) {
+                    club.description.substring(0,200) + "..."
+                }
+                else{
+                    club.description
+                }
+
+                if (clubDescriptionShort.equals(null)) {
+                    clubDescriptionShort = "No Description Available"
+                }
+                description?.text = clubDescriptionShort
+                itemView.setOnClickListener{
+                    listener.onClubCardClick(club)
+                }
+           }
+        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClubViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.club_item, parent, false)
-        return ViewHolder(view)
+        return ClubViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val club = clubs[position]
-        var clubDescriptionShort = if (club.description.length > 200) {
-            club.description.substring(0,200) + "..."
-        }
-        else{
-            club.description
-        }
-
-        if (clubDescriptionShort.equals(null)) {
-            clubDescriptionShort = "No Description Available"
-        }
-        holder.clubNameTextView.text = club.name
-        holder.clubDescription.text = clubDescriptionShort
-        holder.itemView.setOnClickListener {
-            view -> val bundle = Bundle().apply {
-                putSerializable("club_info", club)
-        }
-            fragment.findNavController().navigate(R.id.action_category_club_to_club_info, bundle) }
-        //add categories here too
+    override fun onBindViewHolder(holder: ClubViewHolder, position: Int) {
+       holder.bind(clubs[position])
 
     }
     override fun getItemCount():Int {
         return clubs.size
     }
-    class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
-        val clubNameTextView: TextView = itemView.findViewById(R.id.clubNameTextView)
-        val clubDescription: TextView = itemView.findViewById(R.id.descriptionTextView)
-        //need to add categories to the club cards
-    }
+
 
 }

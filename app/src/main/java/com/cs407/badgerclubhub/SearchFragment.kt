@@ -1,13 +1,21 @@
 package com.cs407.badgerclubhub
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,8 +28,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.Serializable
+import java.util.Timer
+import java.util.TimerTask
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), ClubAdapter.onClubCardClickListener {
     //searchViewModel variable
     private lateinit var viewModel: SearchViewModel
     //category buttons
@@ -41,6 +51,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var clubsRecyclerView: RecyclerView
     private lateinit var adapter: ClubAdapter
+    private lateinit var searchBar: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -101,8 +112,30 @@ class SearchFragment : Fragment() {
         viewModel.categoriesMap.observe(viewLifecycleOwner) {
                 categoriesMap -> populateButtons(categoriesMap as Map<String, MutableList<Club>>)
         }
-
+        //implement search functionality
         viewModel.getAllClubs(this.requireContext())
+        searchBar = view.findViewById<EditText>(R.id.search_bar)
+        searchBar.requestFocus()
+
+        searchBar.setOnKeyListener { view, keyCode, keyEvent ->
+
+            if(keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action== KeyEvent.ACTION_UP){
+                Log.d("SEARCH", "Enter key detected")
+                val searchTerm = searchBar.getText().toString()
+                Log.d("SEARCH", "Search term entered: $searchTerm")
+                viewModel.allClubs.observe(viewLifecycleOwner) {allClubs ->
+                    if(allClubs.isNullOrEmpty()){
+                        Log.e("SEARCH", "No clubs available in ViewModel")
+                    }
+                    else {
+                        Log.d("SEARCH", "Clubs fetched: ${allClubs.size}")
+                        search(searchBar, searchTerm, allClubs as ArrayList<Club>)
+                    }
+                }
+                true
+            }
+                false
+        }
     }
 
     private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {
@@ -147,6 +180,8 @@ class SearchFragment : Fragment() {
         }
     }
 
+
+
     //navigate from buttons to category fragment
     private fun navToCategory(category: String, clubs: List<Club>){
 
@@ -156,5 +191,32 @@ class SearchFragment : Fragment() {
         }
 
         findNavController().navigate(R.id.action_search_category_to_category, bundle)
+    }
+
+    //search bar functionality
+    private fun search(searchBar: EditText, searchTerm: String, allClubs: ArrayList<Club>) {
+        var searchResults = ArrayList<Club>()
+        for (club in allClubs) {
+            if(club.name.toString().contains(searchTerm, ignoreCase = true) || club.description.toString().contains(searchTerm, ignoreCase = true)
+                || club.categoryNames.contains(searchTerm)) {
+                searchResults.add(club)
+
+            }
+        }
+        if(!searchResults.isEmpty()){
+            val bundle = Bundle().apply {
+                putSerializable("search_results", searchResults)
+            }
+            findNavController().navigate(R.id.action_search_to_results, bundle)
+        }
+        else {
+            Toast.makeText(activity, "No Results Found", Toast.LENGTH_SHORT).show()
+        }
+    }
+    override fun onClubCardClick(club: Club){
+        val bundle = Bundle().apply {
+            putSerializable("club_info", club)
+        }
+        findNavController().navigate(R.id.action_search_club_to_club_info, bundle)
     }
 }

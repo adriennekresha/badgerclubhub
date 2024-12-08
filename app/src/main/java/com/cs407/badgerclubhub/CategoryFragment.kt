@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
 
 @Suppress("DEPRECATION")
-class CategoryFragment : Fragment() {
+class CategoryFragment : Fragment(), ClubAdapter.onClubCardClickListener {
     private lateinit var categoryName: String
     private lateinit var  categoryTextView: TextView
     private lateinit var recyclerView: RecyclerView
@@ -53,17 +53,18 @@ class CategoryFragment : Fragment() {
                 else -> false
             }
         }
-        viewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
-        categoryName = arguments?.getString("category_name").toString()
-        categoryTextView = view.findViewById(R.id.categoryTextView)
-        categoryTextView.text = categoryName
-        val clubs = arguments?.getSerializable("clubs_list") as? ArrayList<Club>
+        val clubs = arguments?.getSerializable("clubs_list") as? List<Club> ?: emptyList()
+        adapter = ClubAdapter(clubs, this)
         recyclerView = view.findViewById(R.id.clubsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        if(clubs!= null) {
-            adapter= ClubAdapter(clubs, this)
-            recyclerView.adapter = adapter
-        }
+        recyclerView.adapter = adapter
 
+
+    }
+    override fun onClubCardClick(club: Club){
+        val bundle = Bundle().apply {
+            putSerializable("club_info", club)
+        }
+        findNavController().navigate(R.id.action_category_club_to_club_info, bundle)
     }
 }
