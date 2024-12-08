@@ -56,15 +56,15 @@ class ClubInfoFragment : Fragment() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    findNavController().navigate(R.id.action_category_home_to_home)
+                    findNavController().navigate(R.id.action_club_info_home_to_home)
                     true
                 }
                 R.id.search -> {
-                    findNavController().navigate(R.id.action_category_search_to_search)
+                    findNavController().navigate(R.id.action_club_info_search_to_search)
                     true
                 }
                 R.id.schedule -> {
-                    findNavController().navigate(R.id.action_category_search_to_search)
+                    findNavController().navigate(R.id.action_club_info_schedule_to_schedule)
                     true
                 }
                 else -> false
