@@ -54,6 +54,9 @@ class CategoryFragment : Fragment(), ClubAdapter.onClubCardClickListener {
             }
         }
         val clubs = arguments?.getSerializable("clubs_list") as? List<Club> ?: emptyList()
+        val categoryName = arguments?.getString("category_name")
+        categoryTextView = view.findViewById<TextView>(R.id.categoryTextView)
+        categoryTextView.text = categoryName
         adapter = ClubAdapter(clubs, this)
         recyclerView = view.findViewById(R.id.clubsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
