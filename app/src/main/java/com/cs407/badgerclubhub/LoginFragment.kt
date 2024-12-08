@@ -1,5 +1,6 @@
 package com.cs407.badgerclubhub
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -68,8 +69,13 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    val displayName = user?.displayName ?: "Unknown User"
-                    Toast.makeText(requireContext(), "Sign-in success: ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    val displayName = user?.displayName
+                    Toast.makeText(requireContext(), "Sign-in success: $displayName", Toast.LENGTH_SHORT).show()
+
+                    // Store display name
+                    val sharedPreferences = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                    sharedPreferences.edit().putString("displayName", displayName).apply()
+
                     findNavController().navigate(R.id.action_login_signup_to_home)
                 }
                 else {
