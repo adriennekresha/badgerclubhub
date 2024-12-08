@@ -61,7 +61,7 @@ class CategoryFragment : Fragment() {
         recyclerView = view.findViewById(R.id.clubsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         if(clubs!= null) {
-            adapter= ClubAdapter(clubs)
+            adapter= ClubAdapter(clubs, this)
             recyclerView.adapter = adapter
         }
 

@@ -77,7 +77,7 @@ class SearchFragment : Fragment() {
         clubsRecyclerView = view.findViewById(R.id.clubsRecyclerView)
         clubsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.allClubs.observe(viewLifecycleOwner, Observer { clubs ->
-            adapter = ClubAdapter(clubs)
+            adapter = ClubAdapter(clubs, this)
             clubsRecyclerView.adapter = adapter
         })
 

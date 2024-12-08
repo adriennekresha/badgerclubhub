@@ -141,5 +141,6 @@
         <action
             android:id="@+id/action_category_schedule_to_schedule"
             app:destination="@id/scheduleFragment"/>
+
     </fragment>
 </navigation>
