@@ -16,12 +16,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class LoginFragment : Fragment() {
-    private lateinit var loginButton: Button
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     private val RC_SIGN_IN = 9001
 
     override fun onCreateView(
@@ -34,6 +35,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         auth = FirebaseAuth.getInstance()
+
+        database = FirebaseDatabase.getInstance().reference
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("38582643988-db2o95dqjdgn0r39tdcsa9m29v7rup47.apps.googleusercontent.com") // Replace with the Web Client ID
@@ -70,6 +73,23 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     val displayName = user?.displayName
+                    val email = user?.email
+                    val uid = user?.uid
+
+                    if (uid != null) {
+                        // Store user data in database
+                        val userMap = mapOf(
+                            "displayName" to displayName,
+                            "email" to email,
+                            "uid" to uid
+                        )
+                        database.child("users").child(uid).setValue(userMap)
+                            .addOnSuccessListener {
+                            }
+                            .addOnFailureListener {
+                            }
+                    }
+
                     Toast.makeText(requireContext(), "Sign-in success: $displayName", Toast.LENGTH_SHORT).show()
 
                     // Store display name
