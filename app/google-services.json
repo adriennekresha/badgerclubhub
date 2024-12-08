@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "38582643988",
+    "project_id": "badger-club-hub",
+    "storage_bucket": "badger-club-hub.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38582643988:android:95ba68d0dd7f135582e601",
+        "android_client_info": {
+          "package_name": "com.cs407.badgerclubhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38582643988-udv3tiu3db55hi8bk0p4r54ms02jfurl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs407.badgerclubhub",
+            "certificate_hash": "4892a231c2795eb4cca6b6a802984a1157ff340b"
+          }
+        },
+        {
+          "client_id": "38582643988-db2o95dqjdgn0r39tdcsa9m29v7rup47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHJN5E1uG7nPKGKU8t48HQdEOwFrp7cDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38582643988-db2o95dqjdgn0r39tdcsa9m29v7rup47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
