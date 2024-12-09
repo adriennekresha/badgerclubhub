@@ -44,6 +44,10 @@ class ResultsFragment : Fragment(), ClubAdapter.onClubCardClickListener {
                     findNavController().navigate(R.id.action_category_search_to_search)
                     true
                 }
+                R.id.profile -> {
+                    findNavController().navigate(R.id.action_results_profile_to_profile)
+                    true
+                }
 
                 else -> false
             }

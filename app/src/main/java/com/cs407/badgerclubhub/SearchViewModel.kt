@@ -34,7 +34,7 @@ class SearchViewModel :ViewModel() {
                     val clubJSON = clubs.getJSONObject(i)
                     val club = Club(
                         name = clubJSON.getString("Name"),
-                        description = clubJSON.getString("Description"),
+                        description = stripHtmlTags(clubJSON.getString("Description")),
                         categoryNames = clubJSON.getJSONArray("CategoryNames").let { jsonArray ->
                             List(jsonArray.length()) { index -> jsonArray.getString(index) }
                         }
@@ -63,7 +63,7 @@ class SearchViewModel :ViewModel() {
                 val clubJSON = clubsArray.getJSONObject(i)
                 val club = Club(
                     name = clubJSON.getString("Name"),
-                    description = clubJSON.getString("Description"),
+                    description = stripHtmlTags(clubJSON.getString("Description")),
                     categoryNames = clubJSON.getJSONArray("CategoryNames").let { jsonArray ->
                         List(jsonArray.length()) { index -> jsonArray.getString(index) }
                     }
@@ -74,4 +74,7 @@ class SearchViewModel :ViewModel() {
         }, {error -> error.printStackTrace()})
         requestQueue.add(request)
     }
+    fun stripHtmlTags(input: String): String {
+        val stripTags = input.replace(Regex("<.*?>"), "")
+        return stripTags.replace(Regex("&nbsp"), "") }
 }
