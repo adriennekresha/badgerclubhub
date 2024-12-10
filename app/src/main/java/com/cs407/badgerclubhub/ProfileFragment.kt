@@ -61,8 +61,8 @@ class ProfileFragment : Fragment() {
                     findNavController().navigate(R.id.action_profile_search_to_search)
                     true
                 }
-                R.id.schedule -> {
-                    findNavController().navigate(R.id.action_profile_schedule_to_schedule)
+                R.id.map -> {
+                    findNavController().navigate(R.id.action_profile_map_to_map)
                     true
                 }
                 R.id.profile -> {

@@ -11,29 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ClubInfoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @Suppress("DEPRECATION")
 class ClubInfoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
-//    }
+    private lateinit var clubName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +27,10 @@ class ClubInfoFragment : Fragment() {
         var descriptionTextView = view?.findViewById<TextView>(R.id.clubDescriptionTextView)
         club?.let {
             nameTextView?.text = it.name
+            clubName = it.name
             descriptionTextView?.text = it.description
         }
         return view
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,8 +46,8 @@ class ClubInfoFragment : Fragment() {
                     findNavController().navigate(R.id.action_club_info_search_to_search)
                     true
                 }
-                R.id.schedule -> {
-                    findNavController().navigate(R.id.action_club_info_schedule_to_schedule)
+                R.id.map -> {
+                    findNavController().navigate(R.id.action_club_info_map_to_map)
                     true
                 }
                 else -> false
@@ -76,7 +57,7 @@ class ClubInfoFragment : Fragment() {
         // Add Club
         val addClubButton = view.findViewById<FloatingActionButton>(R.id.addClubButton)
         addClubButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Club added to My Hub", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "$clubName added to My Hub", Toast.LENGTH_SHORT).show()
         }
     }
 }

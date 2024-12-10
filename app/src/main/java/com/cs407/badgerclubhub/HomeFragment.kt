@@ -47,8 +47,8 @@ class HomeFragment : Fragment() {
                     findNavController().navigate(R.id.action_home_search_to_search)
                     true
                 }
-                R.id.schedule -> {
-                    findNavController().navigate(R.id.action_home_schedule_to_schedule)
+                R.id.map -> {
+                    findNavController().navigate(R.id.action_home_map_to_map)
                     true
                 }
                 R.id.profile -> {

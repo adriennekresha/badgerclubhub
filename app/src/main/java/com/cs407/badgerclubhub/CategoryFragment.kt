@@ -46,8 +46,8 @@ class CategoryFragment : Fragment(), ClubAdapter.onClubCardClickListener {
                     findNavController().navigate(R.id.action_category_search_to_search)
                     true
                 }
-                R.id.schedule -> {
-                    findNavController().navigate(R.id.action_category_search_to_search)
+                R.id.map -> {
+                    findNavController().navigate(R.id.action_category_map_to_map)
                     true
                 }
                 R.id.profile -> {

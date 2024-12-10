@@ -76,8 +76,8 @@ class SearchFragment : Fragment(), ClubAdapter.onClubCardClickListener {
                 R.id.search -> {
                     true
                 }
-                R.id.schedule -> {
-                    findNavController().navigate(R.id.action_search_schedule_to_schedule)
+                R.id.map -> {
+                    findNavController().navigate(R.id.action_search_map_to_map)
                     true
                 }
                 R.id.profile -> {

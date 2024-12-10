@@ -31,17 +31,17 @@ class ResultsFragment : Fragment(), ClubAdapter.onClubCardClickListener {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
-                    findNavController().navigate(R.id.action_category_home_to_home)
+                    findNavController().navigate(R.id.action_results_home_to_home)
                     true
                 }
 
                 R.id.search -> {
-                    findNavController().navigate(R.id.action_category_search_to_search)
+                    findNavController().navigate(R.id.action_results_search_to_search)
                     true
                 }
 
-                R.id.schedule -> {
-                    findNavController().navigate(R.id.action_category_search_to_search)
+                R.id.map -> {
+                    findNavController().navigate(R.id.action_results_map_to_map)
                     true
                 }
                 R.id.profile -> {
