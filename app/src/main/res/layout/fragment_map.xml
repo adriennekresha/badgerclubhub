@@ -14,7 +14,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-black"
-        android:text="My Map"
+        android:text="Common Meeting Locations"
         android:textColor="@color/red"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -38,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:liteMode="true"
-            app:mapType="normal" />
+            app:mapType="normal"
+            android:clickable="true" />
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

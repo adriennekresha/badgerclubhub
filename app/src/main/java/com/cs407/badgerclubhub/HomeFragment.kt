@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
@@ -50,8 +51,17 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         loadClubs()
 
-        // Discover Clubs
+        val noClubsTextView = view.findViewById<TextView>(R.id.noClubs)
         discoverButton = view.findViewById(R.id.discoverButton)
+        if (clubList.isEmpty()) {
+            noClubsTextView.visibility = View.VISIBLE
+            discoverButton.visibility = View.VISIBLE
+        } else {
+            noClubsTextView.visibility = View.INVISIBLE
+            discoverButton.visibility = View.INVISIBLE
+        }
+
+        // Discover Clubs
         discoverButton.setOnClickListener {
             findNavController().navigate(R.id.action_home_discover_to_search)
         }

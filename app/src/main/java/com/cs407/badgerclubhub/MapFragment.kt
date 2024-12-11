@@ -1,6 +1,5 @@
 package com.cs407.badgerclubhub;
 
-import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -18,7 +16,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MapFragment : Fragment() {
 
@@ -42,10 +40,11 @@ class MapFragment : Fragment() {
             // map is ready
             map = googleMap
 
-            map.uiSettings.isMapToolbarEnabled = true
-            map.uiSettings.isZoomControlsEnabled = true
-            map.uiSettings.isScrollGesturesEnabled = true
-            map.moveCamera(CameraUpdateFactory.scrollBy(5f, 5f))
+            map.setOnMapLoadedCallback{
+                map.uiSettings.isMapToolbarEnabled = true
+                map.uiSettings.isZoomControlsEnabled = true
+                map.uiSettings.isScrollGesturesEnabled = true
+            }
 
             // create marker for Bascom Hall
             mDestinationLatLng = LatLng(43.0753, -89.4034)
@@ -54,6 +53,8 @@ class MapFragment : Fragment() {
             // check location permissions and draw a polyline between current location and Bascom Hall
             checkLocationPermission()
         }
+
+
 
         // initialize the fusedLocationProviderClient to access the current location
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity().applicationContext)
