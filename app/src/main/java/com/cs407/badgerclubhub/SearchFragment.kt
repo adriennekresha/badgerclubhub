@@ -145,43 +145,43 @@ class SearchFragment : Fragment(), ClubAdapter.onClubCardClickListener {
 
     private fun populateButtons (categoriesMap: Map<String, MutableList<Club>>) {
         academic_career.setOnClickListener {
-           navToCategory("Academic/Career", categoriesMap["Academic/Career"]?: emptyList())
+           navToCategory("Academic/Career", categoriesMap["Academic/Career"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         activism_advocacy.setOnClickListener {
-            navToCategory("Activism/Advocacy", categoriesMap["Activism/Advocacy"]?: emptyList())
+            navToCategory("Activism/Advocacy", categoriesMap["Activism/Advocacy"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         agriculture_environmental.setOnClickListener {
-            navToCategory("Agricultural/Environmental", categoriesMap["Agricultural/Environmental"]?: emptyList())
+            navToCategory("Agricultural/Environmental", categoriesMap["Agricultural/Environmental"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         arts_music.setOnClickListener {
-           navToCategory("Arts/Music", categoriesMap["Arts/Music"]?: emptyList())
+           navToCategory("Arts/Music", categoriesMap["Arts/Music"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         cultural_ethnic.setOnClickListener {
-            navToCategory("Cultural/Ethnic", categoriesMap["Cultural/Ethnic"]?: emptyList())
+            navToCategory("Cultural/Ethnic", categoriesMap["Cultural/Ethnic"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         graduate_professional.setOnClickListener {
-            navToCategory("Graduate/Professional", categoriesMap["Graduate/Professional"]?: emptyList())
+            navToCategory("Graduate/Professional", categoriesMap["Graduate/Professional"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         health_wellness.setOnClickListener {
-            navToCategory("Health/Wellness", categoriesMap["Health/Welness"]?: emptyList())
+            navToCategory("Health/Wellness", categoriesMap["Health/Welness"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         media_publication.setOnClickListener {
-            navToCategory("Media/Publication", categoriesMap["Media/Publication"]?: emptyList())
+            navToCategory("Media/Publication", categoriesMap["Media/Publication"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         political_interest.setOnClickListener {
-            navToCategory("Political Interest", categoriesMap["Political Interest"]?: emptyList())
+            navToCategory("Political Interest", categoriesMap["Political Interest"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         religious_spiritual.setOnClickListener {
-            navToCategory("Religious/Spiritual", categoriesMap["Religious/Spiritual"]?: emptyList())
+            navToCategory("Religious/Spiritual", categoriesMap["Religious/Spiritual"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         service_volunteer.setOnClickListener {
-            navToCategory("Service/Volunteer", categoriesMap["Service/Volunteer"]?: emptyList())
+            navToCategory("Service/Volunteer", categoriesMap["Service/Volunteer"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         social_fraternity_sorority.setOnClickListener {
-            navToCategory("Social Fraternity/Sorority", categoriesMap["Social Fraternity/Sorority"]?: emptyList())
+            navToCategory("Social Fraternity/Sorority", categoriesMap["Social Fraternity/Sorority"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         sports_recreation.setOnClickListener {
-            navToCategory("Sports/Recreation", categoriesMap["Sports/Recreation"]?: emptyList())
+            navToCategory("Sports/Recreation", categoriesMap["Sports/Recreation"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
     }
 
@@ -189,12 +189,10 @@ class SearchFragment : Fragment(), ClubAdapter.onClubCardClickListener {
 
     //navigate from buttons to category fragment
     private fun navToCategory(category: String, clubs: List<Club>){
-
         val bundle = Bundle().apply {
             putString("category_name", category)
             putSerializable("clubs_list", ArrayList(clubs))
         }
-
         findNavController().navigate(R.id.action_search_category_to_category, bundle)
     }
 

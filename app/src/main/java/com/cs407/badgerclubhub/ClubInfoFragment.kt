@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 @Suppress("DEPRECATION")
 class ClubInfoFragment : Fragment() {
@@ -18,6 +21,8 @@ class ClubInfoFragment : Fragment() {
     private lateinit var clubName: String
     private lateinit var clubDescription: String
     private lateinit var addRemoveButton: FloatingActionButton
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +45,10 @@ class ClubInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Firebase
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
 
         // Add clubs
         addRemoveButton = view.findViewById(R.id.addClubButton)
@@ -104,6 +113,21 @@ class ClubInfoFragment : Fragment() {
         editor.putString("club_${club.name}_description", club.description)
         editor.putStringSet("club_${club.name}_categories", club.categoryNames.toSet())
         editor.apply()
+
+        // Add club to Firebase under the logged in user
+        auth.currentUser?.let { user ->
+            val clubData = mapOf(
+                "name" to club.name,
+                "description" to club.description,
+                "categoryNames" to club.categoryNames
+            )
+
+            database.child("users")
+                .child(user.uid)
+                .child("savedClubs")
+                .child(club.name)
+                .setValue(clubData)
+        }
     }
 
     // Function to remove a club from My Clubs
@@ -116,6 +140,15 @@ class ClubInfoFragment : Fragment() {
         editor.remove("club_${club.name}_description")
         editor.remove("club_${club.name}_categories")
         editor.apply()
+
+        // Remove club from Firebase
+        auth.currentUser?.let { user ->
+            database.child("users")
+                .child(user.uid)
+                .child("savedClubs")
+                .child(club.name)
+                .removeValue()
+        }
     }
 
 
