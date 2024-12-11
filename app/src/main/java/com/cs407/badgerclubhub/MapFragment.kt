@@ -23,7 +23,15 @@ import com.google.android.gms.maps.model.PolylineOptions
 class MapFragment : Fragment() {
 
     private lateinit var map: GoogleMap
-    private lateinit var mDestinationLatLng: LatLng
+    private lateinit var mBascomLatLng: LatLng
+    private lateinit var mMemULatLng : LatLng
+    private lateinit var mRedGymnLatLng : LatLng
+    private lateinit var mNickLatLng: LatLng
+    private lateinit var mCSLatLng: LatLng
+    private lateinit var mColLibLatLng: LatLng
+    private lateinit var mEHallLatLng: LatLng
+    private lateinit var mBakkeLatLng: LatLng
+
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
 
     override fun onCreateView(
@@ -45,13 +53,33 @@ class MapFragment : Fragment() {
             map.uiSettings.isMapToolbarEnabled = true
             map.uiSettings.isZoomControlsEnabled = true
             map.uiSettings.isScrollGesturesEnabled = true
-            map.moveCamera(CameraUpdateFactory.scrollBy(5f, 5f))
-
             // create marker for Bascom Hall
-            mDestinationLatLng = LatLng(43.0753, -89.4034)
-            setLocationMarker(mDestinationLatLng, "Bascom Hall")
+            mBascomLatLng = LatLng(43.0753, -89.4034)
+            setLocationMarker(mBascomLatLng, "Bascom Hall")
+            //create marker for Memorial Union
 
-            // check location permissions and draw a polyline between current location and Bascom Hall
+            mMemULatLng = LatLng(43.076666740089266, -89.40007667727993)
+            setLocationMarker(mMemULatLng, "Memorial Union")
+            //create marker for red gym
+            mRedGymnLatLng = LatLng(43.0762, -89.3984)
+            setLocationMarker(mRedGymnLatLng, "Red Gym")
+            //create location marker for nicholas recreation center
+            mNickLatLng = LatLng(43.0709, -89.3991)
+            setLocationMarker(mNickLatLng, "Nicholas Recreation Center")
+            //create location marker for computer science building
+            mCSLatLng = LatLng(43.0717, -89.4067)
+            setLocationMarker(mCSLatLng, "Computer Science Building")
+            //create location marker for College Library
+            mColLibLatLng = LatLng(43.0770, -89.4013)
+            setLocationMarker(mColLibLatLng, "College Library")
+            //create location marker for Engineering Hall
+            mEHallLatLng = LatLng(43.0719, -89.4103)
+            setLocationMarker(mEHallLatLng, "Engineering Hall")
+            //set location for the Bakke
+            mBakkeLatLng = LatLng(43.0769, -89.4202)
+            setLocationMarker(mBakkeLatLng, "Bakke Recreate and Wellbeing Center")
+
+
             checkLocationPermission()
         }
 
