@@ -1,5 +1,6 @@
 package com.cs407.badgerclubhub
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class ClubInfoFragment : Fragment() {
 
     private lateinit var clubName: String
+    private lateinit var clubDescription: String
+    private lateinit var addRemoveButton: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,16 +28,51 @@ class ClubInfoFragment : Fragment() {
         val club = arguments?.getSerializable("club_info") as? Club
         var nameTextView = view?.findViewById<TextView>(R.id.clubNameTextView)
         var descriptionTextView = view?.findViewById<TextView>(R.id.clubDescriptionTextView)
+        // Get club info
         club?.let {
             nameTextView?.text = it.name
             clubName = it.name
             descriptionTextView?.text = it.description
+            clubDescription = it.description
         }
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Add clubs
+        addRemoveButton = view.findViewById(R.id.addClubButton)
+        val club = arguments?.getSerializable("club_info") as? Club
+
+        // Check if the club is already added
+        val sharedPrefs = requireActivity().getSharedPreferences("MyClubs", Context.MODE_PRIVATE)
+        val savedClubs = sharedPrefs.getStringSet("my_clubs", mutableSetOf()) ?: mutableSetOf()
+        val isClubAdded = club?.let { savedClubs.contains(it.name) } ?: false
+
+        // Edit button image depending on if the club is added or not
+        if (isClubAdded) {
+            addRemoveButton.setImageResource(R.drawable.ic_remove)
+        } else {
+            addRemoveButton.setImageResource(R.drawable.ic_add)
+        }
+
+        addRemoveButton.setOnClickListener {
+            club?.let {
+                if (isClubAdded) {
+                    // Remove club
+                    removeClub(it)
+                    Toast.makeText(requireContext(), "${it.name} removed from My Clubs", Toast.LENGTH_LONG).show()
+                } else {
+                    // Add club
+                    saveClub(it)
+                    Toast.makeText(requireContext(), "${it.name} added to My Clubs", Toast.LENGTH_LONG).show()
+                }
+                findNavController().navigate(R.id.action_club_info_home_to_home)
+            }
+        }
+
+        // Bottom navigation
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -54,10 +92,31 @@ class ClubInfoFragment : Fragment() {
             }
         }
 
-        // Add Club
-        val addClubButton = view.findViewById<FloatingActionButton>(R.id.addClubButton)
-        addClubButton.setOnClickListener {
-            Toast.makeText(requireContext(), "$clubName added to My Hub", Toast.LENGTH_SHORT).show()
-        }
     }
+
+    // Function to save a club to My Clubs
+    private fun saveClub(club: Club) {
+        val sharedPrefs = requireActivity().getSharedPreferences("MyClubs", Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        val clubs = sharedPrefs.getStringSet("my_clubs", mutableSetOf()) ?: mutableSetOf()
+        clubs.add(club.name)
+        editor.putStringSet("my_clubs", clubs)
+        editor.putString("club_${club.name}_description", club.description)
+        editor.putStringSet("club_${club.name}_categories", club.categoryNames.toSet())
+        editor.apply()
+    }
+
+    // Function to remove a club from My Clubs
+    private fun removeClub(club: Club) {
+        val sharedPrefs = requireActivity().getSharedPreferences("MyClubs", Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        val clubs = sharedPrefs.getStringSet("my_clubs", mutableSetOf()) ?: mutableSetOf()
+        clubs.remove(club.name)
+        editor.putStringSet("my_clubs", clubs)
+        editor.remove("club_${club.name}_description")
+        editor.remove("club_${club.name}_categories")
+        editor.apply()
+    }
+
+
 }

@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="My Hub"
+        android:text="Badger Club Hub"
         android:textColor="@color/red"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -23,7 +23,7 @@
         android:id="@+id/clubs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clubs"
+        android:text="My Clubs"
         android:fontFamily="sans-serif-black"
         android:textColor="@color/red"
         android:textSize="25sp"
@@ -34,8 +34,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myClubsRecyclerView"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="560dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -47,36 +49,13 @@
         android:id="@+id/discoverButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:backgroundTint="@color/red"
-        android:text="Discover Clubs"
+        android:text="Discover More Clubs"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/myClubsRecyclerView" />
-
-    <TextView
-        android:id="@+id/upcomingEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Upcoming Events"
-        android:textColor="@color/red"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@+id/myClubsRecyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/discoverButton" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcomingEventsRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/upcomingEvents"
-        app:layout_constraintTop_toBottomOf="@id/upcomingEvents"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginTop="10dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
