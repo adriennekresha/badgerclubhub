@@ -65,7 +65,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/education_bag_learning_24_svgrepo_com"
-                android:tooltipText="Academic/Career" />
+                android:tooltipText="Academic/Career"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/activism_advocacy"
                 android:layout_width="80dp"
@@ -74,7 +75,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/advocate_svgrepo_com"
-                android:tooltipText="Activism/Advocacy" />
+                android:tooltipText="Activism/Advocacy"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/agriculture_environmental"
                 android:layout_width="80dp"
@@ -83,7 +85,9 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/care_ecology_environment_svgrepo_com"
-                android:tooltipText="Agriculture/Environmental" />
+                android:tooltipText="Agriculture/Environmental"
+                app:tint="@color/white" />
+
             <ImageButton
                 android:id="@+id/arts_music"
                 android:layout_width="80dp"
@@ -92,7 +96,9 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/art_design_paint_pallet_format_text_svgrepo_com"
-                android:tooltipText="Arts/Music" />
+                android:tooltipText="Arts/Music"
+                app:tint="@color/white" />
+
             <ImageButton
                 android:id="@+id/cultural_ethnic"
                 android:layout_width="80dp"
@@ -101,7 +107,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/globe_1_svgrepo_com"
-                android:tooltipText="Cultural/Ethnic" />
+                android:tooltipText="Cultural/Ethnic"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/graduate_professional"
                 android:layout_width="80dp"
@@ -110,7 +117,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/professional_marketplace_svgrepo_com"
-                android:tooltipText="Graduate/Professional" />
+                android:tooltipText="Graduate/Professional"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/health_wellness"
                 android:layout_width="80dp"
@@ -119,7 +127,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/health_medical_svgrepo_com"
-                android:tooltipText="Health/Wellness" />
+                android:tooltipText="Health/Wellness"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/media_publication"
                 android:layout_width="80dp"
@@ -128,7 +137,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/newspaper_svgrepo_com"
-                android:tooltipText="Media/Publication" />
+                android:tooltipText="Media/Publication"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/political_interest"
                 android:layout_width="80dp"
@@ -137,7 +147,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/government_svgrepo_com"
-                android:tooltipText="Political Interest" />
+                android:tooltipText="Political Interest"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/religious_spiritual"
                 android:layout_width="80dp"
@@ -146,7 +157,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/heavensabove_svgrepo_com"
-                android:tooltipText="Religious/Spiritual" />
+                android:tooltipText="Religious/Spiritual"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/service_volunteer"
                 android:layout_width="80dp"
@@ -155,7 +167,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/heart_svgrepo_com"
-                android:tooltipText="Service/Volunteer" />
+                android:tooltipText="Service/Volunteer"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/social_fraternity_sorority"
                 android:layout_width="80dp"
@@ -164,7 +177,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/people_svgrepo_com"
-                android:tooltipText="Social Fraternity/Sorority" />
+                android:tooltipText="Social Fraternity/Sorority"
+                app:tint="@color/white" />
             <ImageButton
                 android:id="@+id/sports_recreation"
                 android:layout_width="80dp"
@@ -173,7 +187,8 @@
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/sports_football_svgrepo_com"
-                android:tooltipText="Sports/Recreation" />
+                android:tooltipText="Sports/Recreation"
+                app:tint="@color/white" />
 
 
         </LinearLayout>
