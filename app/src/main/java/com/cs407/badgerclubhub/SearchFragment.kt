@@ -163,7 +163,7 @@ class SearchFragment : Fragment(), ClubAdapter.onClubCardClickListener {
             navToCategory("Graduate/Professional", categoriesMap["Graduate/Professional"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         health_wellness.setOnClickListener {
-            navToCategory("Health/Wellness", categoriesMap["Health/Welness"]?.sortedBy { it.name.lowercase() } ?: emptyList())
+            navToCategory("Health/Wellness", categoriesMap["Health/Wellness"]?.sortedBy { it.name.lowercase() } ?: emptyList())
         }
         media_publication.setOnClickListener {
             navToCategory("Media/Publication", categoriesMap["Media/Publication"]?.sortedBy { it.name.lowercase() } ?: emptyList())
