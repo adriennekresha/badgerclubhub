@@ -15,6 +15,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -88,12 +89,20 @@ class MapFragment : Fragment() {
         return view
     }
 
-    private fun setLocationMarker(destination: LatLng, destinationName: String) {
+    private fun setLocationMarker(destination: LatLng, destinationName: String, isCurrentLocation: Boolean = false) {
+        // Change color of current location marker
+        val markerColor = if (isCurrentLocation) {
+            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+        }
+        else {
+            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+        }
         // create marker
         map.addMarker(
             MarkerOptions()
                 .position(destination)
                 .title(destinationName)
+                .icon(markerColor)
         )
 
         // move camera to marker's location and zoom 15x
@@ -114,7 +123,7 @@ class MapFragment : Fragment() {
                     if (location != null) {
                         // store current location and convert to LatLng
                         val currentLatLong = LatLng(location.latitude, location.longitude)
-                        setLocationMarker(currentLatLong, "My Location")
+                        setLocationMarker(currentLatLong, "My Location", true)
                     }
                 }
         }
