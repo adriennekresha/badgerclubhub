@@ -77,29 +77,34 @@ class LoginFragment : Fragment() {
                     val uid = user?.uid
 
                     if (uid != null) {
-                        // Store user data in database
-                        val userMap = mapOf(
-                            "displayName" to displayName,
-                            "email" to email,
-                            "uid" to uid
-                        )
-                        database.child("users").child(uid).setValue(userMap)
-                            .addOnSuccessListener {
+                        // Don't overwrite saved clubs when a user logs in
+                        database.child("users").child(uid).get().addOnSuccessListener { snapshot ->
+                            val updates = mutableMapOf<String, Any>()
+
+                            if (snapshot.hasChild("savedClubs")) {
+                                updates["savedClubs"] = snapshot.child("savedClubs").value as Map<*, *>
                             }
-                            .addOnFailureListener {
-                            }
+
+                            // Update user data
+                            updates["displayName"] = displayName ?: ""
+                            updates["email"] = email ?: ""
+                            updates["uid"] = uid
+
+                            // Update proper fields
+                            database.child("users").child(uid).updateChildren(updates)
+                                .addOnSuccessListener {
+                                    Toast.makeText(requireContext(), "Welcome: $displayName", Toast.LENGTH_SHORT).show()
+
+                                    // Store display name
+                                    val sharedPreferences = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                                    sharedPreferences.edit().putString("displayName", displayName).apply()
+
+                                    findNavController().navigate(R.id.action_login_signup_to_home)
+                                }
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Sign-in failed", Toast.LENGTH_SHORT).show()
                     }
-
-                    Toast.makeText(requireContext(), "Sign-in success: $displayName", Toast.LENGTH_SHORT).show()
-
-                    // Store display name
-                    val sharedPreferences = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
-                    sharedPreferences.edit().putString("displayName", displayName).apply()
-
-                    findNavController().navigate(R.id.action_login_signup_to_home)
-                }
-                else {
-                    Toast.makeText(requireContext(), "Sign-in failed", Toast.LENGTH_SHORT).show()
                 }
             }
     }
